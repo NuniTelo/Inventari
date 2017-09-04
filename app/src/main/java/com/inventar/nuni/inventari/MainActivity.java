@@ -77,9 +77,12 @@ public class MainActivity extends AppCompatActivity {
         //per rifreskim pas cdo shtimi beji uncomment startActivity(new Intent(this,MainActivity.class)); tek klasa ShtoArtikull
         //ndersa per rifreskim automtik cdo 2 minuta + sa here hapet aplikacioni nga fillimi
         rifresko_draw();
-        rifresko_nderfaqe(koha_fillestare);
-
+        if(kontrollo_lidhje()==true) {
+            rifresko_nderfaqe(koha_fillestare);
+        }
         //hidh ne databaze nga teksti
+
+
         try {
             text_to_db();
             gjatesia = id_db.size();
@@ -96,17 +99,18 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        //merr info nga databazaa
+        //merr info nga databaza
         merr_info();
 
 
-            //adapteri i recycleview
-            mAdapter = new MyAdapter(input_id, input_emer, this, input_njesi, input_kategori, input_cmim, input_data);
-            recyclerView.setAdapter(mAdapter);
+        //adapteri i recycleview
+        mAdapter = new MyAdapter(input_id, input_emer, this, input_njesi, input_kategori, input_cmim, input_data);
+        recyclerView.setAdapter(mAdapter);
 
-            //swipe-refresh
+        //swipe-refresh
 
-            mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);
+        mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);
+        if (kontrollo_lidhje() == true) {
             mySwipeRefreshLayout.setOnRefreshListener(
                     new SwipeRefreshLayout.OnRefreshListener() {
                         @Override
@@ -117,6 +121,11 @@ public class MainActivity extends AppCompatActivity {
                     }
             );
         }
+        else {
+            mySwipeRefreshLayout.setEnabled(false);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

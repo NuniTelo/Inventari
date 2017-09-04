@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        //merr info nga databaza
+        //merr info nga databazaa
         merr_info();
 
 

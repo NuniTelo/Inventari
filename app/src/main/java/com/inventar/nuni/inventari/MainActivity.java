@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     SwipeRefreshLayout mySwipeRefreshLayout;
-    FloatingActionButton fab;
     private ArrayList<String> input_emer;
     private ArrayList<String> input_id;
     private ArrayList<String> input_njesi;
@@ -51,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     private List<String> kategori_db;
     private List<String> cmim_db;
     private List<String> data_db;
-    private int gjatesi_lista_fillim;
     private int lastId;
     DatabazeCon mydb = new DatabazeCon(this);
 
@@ -70,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
         rifresko_draw();
         if(kontrollo_lidhje()==true) {
             rifresko_nderfaqe(koha_fillestare);
-
-
         }
         //hidh ne databaze nga teksti
 
@@ -94,9 +90,11 @@ public class MainActivity extends AppCompatActivity {
 
         //merr info nga databaza
         merr_info();
-        lastId = id_db.size();
 
-        rifresko_ne_background();
+        if(kontrollo_lidhje()==true) {
+            lastId = id_db.size();
+            rifresko_ne_background();
+        }
 
         //adapteri i recycleview
         mAdapter = new MyAdapter(input_id, input_emer, this, input_njesi, input_kategori, input_cmim, input_data);
@@ -122,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -366,7 +363,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }.start();
     }
-
 
 }
 

@@ -1,12 +1,15 @@
 package com.inventar.nuni.inventari;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,7 @@ public class BackgroundService extends Service {
     private List<String> data_db;
     private String url_kerkuar = "https://dl.dropboxusercontent.com/s/q6hhhxrbcw4u02y/artikulli.txt?dl=0";
     DatabazeCon mydb = new DatabazeCon(this);
+
 
     @Nullable
     @Override

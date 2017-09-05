@@ -64,19 +64,36 @@ try {
 
         //Cursor rezultate = db.rawQuery("select * from " + TABLE_NAME, null);
         // Cursor rezultate = db.rawQuery("select * from " + TABLE_NAME+ " ORDER BY "+ ID +" DESC", null);
-        Cursor rezultate = db.rawQuery("SELECT * from " + TABLE_NAME + " ORDER BY "+ DATA +" DESC", null);
-        return rezultate;
+        return db.rawQuery("SELECT * from " + TABLE_NAME + " ORDER BY "+ DATA +" DESC", null);
+    }
+    public int count_info() {
+        SQLiteDatabase db = getWritableDatabase();
+
+        int count=0;
+        //Cursor rezultate = db.rawQuery("select * from " + TABLE_NAME, null);
+        // Cursor rezultate = db.rawQuery("select * from " + TABLE_NAME+ " ORDER BY "+ ID +" DESC", null);
+        Cursor rezultate = db.rawQuery("SELECT count(1) from " + TABLE_NAME + " ORDER BY "+ DATA +" DESC", null);
+        if(rezultate.moveToFirst()){
+            count=rezultate.getInt(0);
+        }
+        rezultate.close();
+        return count;
     }
 
+    public Cursor get_newer(int id) {
+        SQLiteDatabase db = getWritableDatabase();
 
+        //Cursor rezultate = db.rawQuery("select * from " + TABLE_NAME, null);
+        // Cursor rezultate = db.rawQuery("select * from " + TABLE_NAME+ " ORDER BY "+ ID +" DESC", null);
+        return  db.rawQuery("SELECT * from " + TABLE_NAME + " WHERE ID>"+id+" ORDER BY "+ DATA +" DESC", null);
+
+    }
 
     public void delete(){
         SQLiteDatabase db = getReadableDatabase();
         db.execSQL("delete from "+ TABLE_NAME);
         db.close();
-
     }
-
 
 
     public long getTaskCount() {

@@ -1,47 +1,31 @@
 package com.inventar.nuni.inventari;
 
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
-
 import static com.inventar.nuni.inventari.R.id.action_settings;
-import static com.inventar.nuni.inventari.R.id.transition_current_scene;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private List<String> kategori_db;
     private List<String> cmim_db;
     private List<String> data_db;
-    private boolean lidhja_kthe;
+    private int gjatesi_lista_fillim;
+    private int lastId;
     DatabazeCon mydb = new DatabazeCon(this);
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -88,13 +73,20 @@ public class MainActivity extends AppCompatActivity {
         rifresko_draw();
         if(kontrollo_lidhje()==true) {
             rifresko_nderfaqe(koha_fillestare);
+
+
         }
         //hidh ne databaze nga teksti
 
 
         try {
+
             text_to_db();
             gjatesia = id_db.size();
+
+
+
+
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -110,6 +102,19 @@ public class MainActivity extends AppCompatActivity {
 
         //merr info nga databaza
         merr_info();
+        lastId = id_db.size();
+
+        final CountDownTimer rifreskim = new CountDownTimer(5000 , 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                update_nderfaqe();
+                this.start();
+            }
+        }.start();
+
+
 
 
         //adapteri i recycleview
@@ -199,12 +204,12 @@ public class MainActivity extends AppCompatActivity {
             input_cmim.add("Cmimi: " + rezultat.getString(4));
             input_data.add("Data: " + rezultat.getString(5));
         }
+        rezultat.close();
         // adapteri
         mAdapter = new MyAdapter(input_id, input_emer, this, input_njesi, input_kategori, input_cmim, input_data);
         recyclerView.setAdapter(mAdapter);
         mySwipeRefreshLayout.setRefreshing(false);
     }
-
 
     public void text_to_db() {
     if(kontrollo_lidhje()==true) {
@@ -273,7 +278,6 @@ public class MainActivity extends AppCompatActivity {
         final CountDownTimer rifreskim = new CountDownTimer((long) koha_funx, 1000) {
             public void onTick(long millisUntilFinished) {
             }
-
             public void onFinish() {
                 update();
                 this.start();
@@ -339,7 +343,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    }
+    public void update_nderfaqe () {
+
+               // final int gjatesia2 = id_db.size();
+               // final String lastId = id_db.get(id_db.size()-1);
+                int rezultat = mydb.count_info();
+                if(rezultat>lastId) {
+                Cursor cursor = mydb.get_newer(lastId);
+                for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                input_id.add("Id Artikullit: " + cursor.getString(0));
+                input_emer.add("Emri Artikullit: " + cursor.getString(1));
+                input_njesi.add("Njesia: " + cursor.getString(2));
+                input_kategori.add("Kategoria: " + cursor.getString(3));
+                input_cmim.add("Cmimi: " + cursor.getString(4));
+                input_data.add("Data: " + cursor.getString(5));
+            }
+            lastId=rezultat;
+
+            cursor.close();
+
+            //adapteri
+
+            mAdapter = new MyAdapter(input_id, input_emer, this, input_njesi, input_kategori, input_cmim, input_data);
+            recyclerView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+        }
+
+        }
+
+
+
+
+
+}
 
 
 

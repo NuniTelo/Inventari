@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
         else {
             mySwipeRefreshLayout.setEnabled(false);
+
         }
     }
 

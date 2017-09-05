@@ -32,25 +32,15 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    SwipeRefreshLayout mySwipeRefreshLayout;
-    private ArrayList<String> input_emer;
-    private ArrayList<String> input_id;
-    private ArrayList<String> input_njesi;
-    private ArrayList<String> input_kategori;
-    private ArrayList<String> input_cmim;
-    private ArrayList<String> input_data;
+    private ArrayList<String> input_emer,input_id,input_njesi,input_kategori,input_cmim,input_data;
+    private List<String> id_db,emri_db,njesi_db,kategori_db,cmim_db,data_db;
     private String info_koha;
     private double koha;
     private String url_kerkuar = "https://dl.dropboxusercontent.com/s/q6hhhxrbcw4u02y/artikulli.txt?dl=0";
     private double koha_fillestare = 120000;
     private int gjatesia2, gjatesia;
-    private List<String> id_db;
-    private List<String> emri_db;
-    private List<String> njesi_db;
-    private List<String> kategori_db;
-    private List<String> cmim_db;
-    private List<String> data_db;
     private int lastId;
+    SwipeRefreshLayout mySwipeRefreshLayout;
     DatabazeCon mydb = new DatabazeCon(this);
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -66,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         //service
         startService(new Intent(getBaseContext(), BackgroundService.class));
-
-
-
 
         rifresko_draw();
         if(kontrollo_lidhje()==true) {

@@ -66,10 +66,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         startService(new Intent(getBaseContext(), BackgroundService.class));
 
-        //rifreskim
-        //dy opsone OSE pas cdo shtimi behet rifreskim automatik,ose rifreskim cdo disa minuta
-        //per rifreskim pas cdo shtimi beji uncomment startActivity(new Intent(this,MainActivity.class)); tek klasa ShtoArtikull
-        //ndersa per rifreskim automtik cdo 2 minuta + sa here hapet aplikacioni nga fillimi
+
         rifresko_draw();
         if(kontrollo_lidhje()==true) {
             rifresko_nderfaqe(koha_fillestare);
@@ -80,13 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         try {
-
             text_to_db();
             gjatesia = id_db.size();
-
-
-
-
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -104,18 +96,7 @@ public class MainActivity extends AppCompatActivity {
         merr_info();
         lastId = id_db.size();
 
-        final CountDownTimer rifreskim = new CountDownTimer(5000 , 1000) {
-            public void onTick(long millisUntilFinished) {
-            }
-
-            public void onFinish() {
-                update_nderfaqe();
-                this.start();
-            }
-        }.start();
-
-
-
+        rifresko_ne_background();
 
         //adapteri i recycleview
         mAdapter = new MyAdapter(input_id, input_emer, this, input_njesi, input_kategori, input_cmim, input_data);
@@ -343,7 +324,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     public void update_nderfaqe () {
 
                // final int gjatesia2 = id_db.size();
@@ -365,6 +345,8 @@ public class MainActivity extends AppCompatActivity {
 
             //adapteri
 
+              Toast.makeText(this,"Produkte te reja!",Toast.LENGTH_SHORT).show();
+             rifresko_draw();
             mAdapter = new MyAdapter(input_id, input_emer, this, input_njesi, input_kategori, input_cmim, input_data);
             recyclerView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
@@ -372,8 +354,18 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    public void rifresko_ne_background(){
 
+        final CountDownTimer rifreskim = new CountDownTimer(5000 , 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
 
+            public void onFinish() {
+                update_nderfaqe();
+                this.start();
+            }
+        }.start();
+    }
 
 
 }

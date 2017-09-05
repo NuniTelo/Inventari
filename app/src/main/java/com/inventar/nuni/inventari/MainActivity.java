@@ -20,13 +20,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import static com.inventar.nuni.inventari.R.id.action_settings;
-
-
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -60,18 +60,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         myToolbar.setTitleTextColor(Color.WHITE);
-        myToolbar.setBackgroundColor(Color.DKGRAY);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setSupportActionBar(myToolbar);
+
+        //service
         startService(new Intent(getBaseContext(), BackgroundService.class));
+
+
 
 
         rifresko_draw();
         if(kontrollo_lidhje()==true) {
             rifresko_nderfaqe(koha_fillestare);
         }
+
         //hidh ne databaze nga teksti
-
-
         try {
             text_to_db();
             gjatesia = id_db.size();
@@ -165,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             text_to_db();
 
         } else {
-            Toast.makeText(MainActivity.this, "Nuk ka levizje ne te dhena!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(MainActivity.this, "Nuk ka levizje ne te dhena!", Toast.LENGTH_LONG).show();
         }
         gjatesia = gjatesia2;
         Cursor rezultat = mydb.shfaq_info();

@@ -18,12 +18,7 @@ import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 public class BackgroundService extends Service {
-    private List<String> id_db;
-    private List<String> emri_db;
-    private List<String> njesi_db;
-    private List<String> kategori_db;
-    private List<String> cmim_db;
-    private List<String> data_db;
+    private List<String> id_db,emri_db,njesi_db,kategori_db,cmim_db,data_db;
     private String url_kerkuar = "https://dl.dropboxusercontent.com/s/q6hhhxrbcw4u02y/artikulli.txt?dl=0";
     DatabazeCon mydb = new DatabazeCon(this);
 

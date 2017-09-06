@@ -2,12 +2,14 @@ package com.inventar.nuni.inventari;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.CountDownTimer;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.inventar.nuni.inventari.info.ItemInfoMActivity;
+
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -68,7 +70,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.emer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(context,InfoShtese.class);
+                Intent it = new Intent(context,ItemInfoMActivity.class);
                 it.putExtra("id",values.get(position));
                 it.putExtra("emer",emr.get(position));
                 it.putExtra("njesi",njesi.get(position));

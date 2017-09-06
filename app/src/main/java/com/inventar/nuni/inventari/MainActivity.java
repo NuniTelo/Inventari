@@ -322,6 +322,7 @@ public class MainActivity extends AppCompatActivity {
                // final String lastId = id_db.get(id_db.size()-1);
                 int rezultat = mydb.count_info();
                 if(rezultat>lastId) {
+
                 Cursor cursor = mydb.get_newer(lastId);
                 for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                 input_id.add("Id Artikullit: " + cursor.getString(0));
@@ -331,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
                 input_cmim.add("Cmimi: " + cursor.getString(4));
                 input_data.add("Data: " + cursor.getString(5));
             }
+
             lastId=rezultat;
 
             cursor.close();

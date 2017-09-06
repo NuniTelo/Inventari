@@ -1,11 +1,13 @@
-package com.inventar.nuni.inventari;
+package com.inventar.nuni.inventari.info;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-public class InfoShtese extends AppCompatActivity {
+import com.inventar.nuni.inventari.R;
+
+public class ItemInfoMActivity extends AppCompatActivity {
 TextView tx1,tx2,tx3,t4,t5,t6;
 
     @Override

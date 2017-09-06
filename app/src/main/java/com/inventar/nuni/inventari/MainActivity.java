@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private int lastId;
     SwipeRefreshLayout mySwipeRefreshLayout;
     DatabazeCon mydb = new DatabazeCon(this);
+    
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.toolbarGray)));
 
         //service
         startService(new Intent(getBaseContext(), BackgroundService.class));

@@ -2,15 +2,21 @@ package com.inventar.nuni.inventari;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.inventar.nuni.inventari.info.InformacionTab;
 import com.inventar.nuni.inventari.info.ItemInfoMActivity;
 
 import java.util.ArrayList;
+
+import static android.app.PendingIntent.getActivity;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<String> values;
@@ -62,29 +68,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         //pjesa kryeseore e shfaqjes se te dhenave
 
         final String idd = values.get(position);
-        holder.id.setText(idd);
+        holder.id.setText("Id Artikullit: "+idd);
 
         final String emri_id= emr.get(position);
-        holder.emer.setText(emri_id);
+        holder.emer.setText("Emri Artikullit: "+emri_id);
 
         holder.emer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent it = new Intent(context,ItemInfoMActivity.class);
                 it.putExtra("id",values.get(position));
-                it.putExtra("emer",emr.get(position));
-                it.putExtra("njesi",njesi.get(position));
-                it.putExtra("kategori",kategori.get(position));
-                it.putExtra("cmim",cmim.get(position));
-                it.putExtra("data",data.get(position));
                 context.startActivity(it);
+
+
             }
         });
-    }
 
-    @Override
-    public int getItemCount() {
-        return values.size();
-    }
 
-}
+            }
+
+            @Override
+            public int getItemCount() {
+                return values.size();
+            }
+
+
+        }

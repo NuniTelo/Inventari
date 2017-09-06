@@ -171,12 +171,20 @@ public class MainActivity extends AppCompatActivity {
         input_id.clear();
         input_emer.clear();
         while (rezultat.moveToNext()) {
+            /*
             input_id.add("Id Artikullit: " + rezultat.getString(0));
             input_emer.add("Emri Artikullit: " + rezultat.getString(1));
             input_njesi.add("Njesia: " + rezultat.getString(2));
             input_kategori.add("Kategoria: " + rezultat.getString(3));
             input_cmim.add("Cmimi: " + rezultat.getString(4));
             input_data.add("Data: " + rezultat.getString(5));
+            */
+            input_id.add( rezultat.getString(0));
+            input_emer.add( rezultat.getString(1));
+            input_njesi.add( rezultat.getString(2));
+            input_kategori.add( rezultat.getString(3));
+            input_cmim.add( rezultat.getString(4));
+            input_data.add(rezultat.getString(5));
         }
         rezultat.close();
         // adapteri
@@ -239,12 +247,21 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         for (rezultat.moveToFirst(); !rezultat.isAfterLast(); rezultat.moveToNext()) {
+            /*
             input_id.add("Id Artikullit: " + rezultat.getString(0));
             input_emer.add("Emri Artikullit: " + rezultat.getString(1));
             input_njesi.add("Njesia: " + rezultat.getString(2));
             input_kategori.add("Kategoria: " + rezultat.getString(3));
             input_cmim.add("Cmimi: " + rezultat.getString(4));
             input_data.add("Data: " + rezultat.getString(5));
+            */
+            input_id.add(rezultat.getString(0));
+            input_emer.add( rezultat.getString(1));
+            input_njesi.add(rezultat.getString(2));
+            input_kategori.add( rezultat.getString(3));
+            input_cmim.add( rezultat.getString(4));
+            input_data.add( rezultat.getString(5));
+
         }
     }
 

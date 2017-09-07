@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.inventar.nuni.inventari.R;
@@ -38,7 +39,13 @@ public class ItemInfoMActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_info_m);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         setTitle("Informacion mbi produktin");
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -60,6 +67,7 @@ public class ItemInfoMActivity extends AppCompatActivity {
         bundle.putString("params", id);
 
     }
+
 
 
     @Override
@@ -86,6 +94,7 @@ public class ItemInfoMActivity extends AppCompatActivity {
 
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -125,4 +134,10 @@ public class ItemInfoMActivity extends AppCompatActivity {
             return null;
         }
     }
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
 }

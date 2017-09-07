@@ -10,12 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.inventar.nuni.inventari.DatabazeCon;
-import com.inventar.nuni.inventari.DownloadTask;
-import com.inventar.nuni.inventari.MainActivity;
-import com.inventar.nuni.inventari.MyAdapter;
 import com.inventar.nuni.inventari.R;
 
 import java.util.ArrayList;
@@ -49,18 +43,20 @@ public class ShitjeTab extends android.support.v4.app.Fragment {
             recyclerView.setLayoutManager(mLayoutManager);
 
             //merr info nga databaza
+            ArtikujDatabaze mydb = new ArtikujDatabaze(getActivity());
+            mydb.delete();
             shkarko_artikuj();
             merr_shitje(id_rreshtit);
 
             //adapteri i recycleview
-            mAdapter = new ShitjeAdapter(id,njesi,getActivity(),sasi,data);
+            mAdapter = new ShitjeAdapter(input_id, input_njesi, getActivity(), input_sasi, input_data);
             recyclerView.setAdapter(mAdapter);
             return rootView;
         }
 
 
         public void shkarko_artikuj(){
-             String url_kerkuar ="https://dl.dropboxusercontent.com/s/q8j6mdrsnx51gcm/artikulli.txt?dl=0";
+            String url_kerkuar ="https://dl.dropboxusercontent.com/s/q8j6mdrsnx51gcm/artikulli.txt?dl=0";
             ArtikujDatabaze mydb = new ArtikujDatabaze(getActivity());
             id= new ArrayList<>();
             njesi = new ArrayList<>();

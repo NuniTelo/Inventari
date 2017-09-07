@@ -59,8 +59,14 @@ public class ArtikujDatabaze extends SQLiteOpenHelper {
 
     public Cursor merr_artikuj_shitje(String id){
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE ID="+id,null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE ID= "+id,null);
         return cursor;
+    }
+
+    public void delete(){
+        SQLiteDatabase db = getReadableDatabase();
+        db.execSQL("delete from "+ TABLE_NAME);
+        db.close();
     }
 
 }

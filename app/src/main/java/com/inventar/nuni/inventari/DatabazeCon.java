@@ -112,35 +112,4 @@ try {
 
     }
 
-    /*
-    public void shto_artikuj_shitje(String id,String njesi,String cmim,String date) {
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        try {
-            db.beginTransaction();
-            contentValues.put("ID", id);
-            contentValues.put("NJESIA", njesi);
-            contentValues.put("SHITJE", cmim);
-            contentValues.put("DATA", date);
-            db.insert("artikuj_shitje", null, contentValues);
-            //db.insertWithOnConflict("artikuj_shitje", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
-            db.setTransactionSuccessful();
-        }finally {
-            db.endTransaction();
-        }
-    }
-
-    public Cursor merr_artikuj_shitje(String id){
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM artikuj_shitje WHERE ID="+id,null);
-        return cursor;
-    }
-*/
-
-
-
-
-
-
-
 }

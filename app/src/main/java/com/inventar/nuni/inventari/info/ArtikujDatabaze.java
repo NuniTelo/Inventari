@@ -14,7 +14,7 @@ import android.util.Log;
 
 public class ArtikujDatabaze extends SQLiteOpenHelper {
 
-    public static final String DB_NAME = "artikujt.db";
+    public static final String DB_NAME = "artikujt_shtese.db";
     public static final String TABLE_NAME = "artikuj_shitje";
     public static final String ID = "ID";
     public static final String NJESI = "NJESI";
@@ -29,10 +29,9 @@ public class ArtikujDatabaze extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table " + TABLE_NAME + "(ID STRING ,NJESI TEXT ," +
+        sqLiteDatabase.execSQL("create table IF NOT EXISTS " + TABLE_NAME + "(ID STRING ,NJESI TEXT ," +
                 "SASI TEXT,DATA STRING)");
-        db=openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS student(eid VARCHAR,ename VARCHAR,esdate VARCHAR);");
+
     }
 
     @Override
@@ -41,16 +40,16 @@ public class ArtikujDatabaze extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void shto_artikuj_shitje(String id,String njesi,String cmim,String date) {
+    public void shto_artikuj_shitje(String id,String njesi,String sasi,String date) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         try {
             db.beginTransaction();
-            contentValues.put("ID", id);
-            contentValues.put("NJESIA", njesi);
-            contentValues.put("SHITJE", cmim);
-            contentValues.put("DATA", date);
-            db.insert("artikuj_shitje", null, contentValues);
+            contentValues.put(ID, id);
+            contentValues.put(NJESI, njesi);
+            contentValues.put(SASI, sasi);
+            contentValues.put(DATA, date);
+            db.insert(TABLE_NAME, null, contentValues);
             //db.insertWithOnConflict("artikuj_shitje", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
             db.setTransactionSuccessful();
         }finally {

@@ -63,7 +63,7 @@ public class ShitjeAdapter extends RecyclerView.Adapter<ShitjeAdapter.ViewHolder
         final String idd = data.get(position);
         holder.data.setText("DATA: "+idd);
 
-        final String emri_id= njesi.get(position);
+        final String emri_id= sasi.get(position);
         holder.shitje.setText("SHITJE: "+emri_id);
 
     }

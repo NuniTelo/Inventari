@@ -21,10 +21,6 @@ import com.inventar.nuni.inventari.R;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-/**
- * Created by n.telo on 9/6/2017.
- */
-
 public class ShitjeTab extends android.support.v4.app.Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -54,7 +50,7 @@ public class ShitjeTab extends android.support.v4.app.Fragment {
 
             //merr info nga databaza
             shkarko_artikuj();
-            merr_shitje();
+            merr_shitje(id_rreshtit);
 
             //adapteri i recycleview
             mAdapter = new ShitjeAdapter(id,njesi,getActivity(),sasi,data);
@@ -97,21 +93,20 @@ public class ShitjeTab extends android.support.v4.app.Fragment {
                 }
             }
 
-            public void merr_shitje(){
+            public void merr_shitje(String id_rresht){
 
                ArtikujDatabaze mydb = new ArtikujDatabaze(getActivity());
-                Cursor rezultat = mydb.merr_artikuj_shitje(id_rreshtit);
+                Cursor rezultat = mydb.merr_artikuj_shitje(id_rresht);
                 input_id = new ArrayList<>();
                 input_njesi= new ArrayList<>();
                 input_sasi= new ArrayList<>();
                 input_data= new ArrayList<>();
 
                 while (rezultat.moveToNext()) {
-
-                    input_id.add("Id Artikullit: " + rezultat.getString(0));
-                    input_njesi.add("Njesia: " + rezultat.getString(1));
-                    input_sasi.add("Kategoria: " + rezultat.getString(2));
-                    input_data.add("Data: " + rezultat.getString(3));
+                    input_id.add(rezultat.getString(0));
+                    input_njesi.add(rezultat.getString(1));
+                    input_sasi.add(rezultat.getString(2));
+                    input_data.add(rezultat.getString(3));
                 }
 
                 rezultat.close();

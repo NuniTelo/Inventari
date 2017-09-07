@@ -5,7 +5,7 @@
 
 
     <TextView
-        android:id="@+id/id_rreshti"
+        android:id="@+id/shitje_rreshti"
         android:layout_width="fill_parent"
         android:layout_height="26dip"
         android:layout_alignParentBottom="true"
@@ -20,7 +20,7 @@
         android:id="@+id/emer_rreshti"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/id_rreshti"
+        android:layout_above="@id/shitje_rreshti"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"

@@ -2,16 +2,12 @@ package com.inventar.nuni.inventari;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.inventar.nuni.inventari.info.InformacionTab;
 import com.inventar.nuni.inventari.info.ItemInfoMActivity;
 
 import java.util.ArrayList;
@@ -36,7 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public ViewHolder(View v) {
             super(v);
             layout = v;
-            id = (TextView) v.findViewById(R.id.id_rreshti);
+            id = (TextView) v.findViewById(R.id.shitje_rreshti);
             emer = (TextView) v.findViewById(R.id.emer_rreshti);
         }
     }
@@ -79,12 +75,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
                 Intent it = new Intent(context,ItemInfoMActivity.class);
                 it.putExtra("id",values.get(position));
+                it.putExtra("pozicioni",position);
                 context.startActivity(it);
-
 
             }
         });
-
 
             }
 
@@ -92,6 +87,5 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             public int getItemCount() {
                 return values.size();
             }
-
 
         }

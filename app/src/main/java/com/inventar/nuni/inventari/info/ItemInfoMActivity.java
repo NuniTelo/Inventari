@@ -1,6 +1,7 @@
 package com.inventar.nuni.inventari.info;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -38,6 +39,7 @@ public class ItemInfoMActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Informacion mbi produkin");
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -63,7 +65,7 @@ public class ItemInfoMActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_item_info_m, menu);
+       // getMenuInflater().inflate(R.menu.menu_item_info_m, menu);
         return true;
     }
 
@@ -74,12 +76,12 @@ public class ItemInfoMActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+      //  noinspection SimplifiableIfStatement
+       if (id == R.id.action_settings) {
             return true;
-        }
+       }
 
-        return super.onOptionsItemSelected(item);
+       return super.onOptionsItemSelected(item);
     }
 
 
@@ -98,6 +100,7 @@ public class ItemInfoMActivity extends AppCompatActivity {
                     return info_tab;
                 case 1:
                     ShitjeTab shitje_tab = new ShitjeTab();
+                    shitje_tab.setArguments(bundle);
                     return shitje_tab;
                 default:
                     return null;

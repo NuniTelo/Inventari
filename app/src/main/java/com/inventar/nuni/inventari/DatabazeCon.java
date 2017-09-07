@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by Nuni on 28/08/2017.
@@ -22,6 +23,7 @@ public class DatabazeCon extends SQLiteOpenHelper {
     public static final String CMIMI = "CMIMI";
     public static final String DATA = "DATA";
     //private SQLiteDatabase db;
+    private Context context;
 
 
     public DatabazeCon(Context context) {
@@ -32,6 +34,8 @@ public class DatabazeCon extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table " + TABLE_NAME + "(ID STRING unique ,PERSHKRIM TEXT ," +
                 "NJESI TEXT,KATEGORI TEXT,CMIMI STRING,DATA STRING)");
+        //sqLiteDatabase.execSQL("CREATE TABLE artikuj_shitje (ID TEXT , NJESIA TEXT, SHITJE TEXT, DATA TEXT)");
+
     }
 
     @Override
@@ -100,6 +104,39 @@ try {
         SQLiteDatabase db = getReadableDatabase();
         return DatabaseUtils.queryNumEntries(db, TABLE_NAME);
     }
+
+    public Cursor getInfoProdukt(String id){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE ID="+id,null);
+        return cursor;
+
+    }
+
+    /*
+    public void shto_artikuj_shitje(String id,String njesi,String cmim,String date) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        try {
+            db.beginTransaction();
+            contentValues.put("ID", id);
+            contentValues.put("NJESIA", njesi);
+            contentValues.put("SHITJE", cmim);
+            contentValues.put("DATA", date);
+            db.insert("artikuj_shitje", null, contentValues);
+            //db.insertWithOnConflict("artikuj_shitje", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
+            db.setTransactionSuccessful();
+        }finally {
+            db.endTransaction();
+        }
+    }
+
+    public Cursor merr_artikuj_shitje(String id){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM artikuj_shitje WHERE ID="+id,null);
+        return cursor;
+    }
+*/
+
 
 
 

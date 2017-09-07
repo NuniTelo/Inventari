@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
         }
         input_id.clear();
         input_emer.clear();
+
         while (rezultat.moveToNext()) {
             /*
             input_id.add("Id Artikullit: " + rezultat.getString(0));
